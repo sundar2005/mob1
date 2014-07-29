@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>SFF homeScreen</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+	<script type="text/javascript" src="js/localstoragedb.min.js"></script>
+	<script type="text/javascript" src="js/localdb.js"></script>
+	<script src="js/jgestures.js"></script>
+	<script src="js/iscroll4.js"></script>
+	<script>
+        var myScroll,
+        pullDownEl, pullDownOffset,
+        pullUpEl, pullUpOffset,
+        generatedCount = 0;
+        
+        function pullUpAction(){
+            
+            if((localStorage.totalRecords/20)-(localStorage.pageNum)>0){
+                //alert(localStorage.totalRecords+"/"+localStorage.pageNum);
+
+                $('.loader,.bg-overlay').removeClass('display-none');
+                localStorage.lazyLoadFlag=true;
+                localStorage.pageNum++;
+               // alert(localStorage.pageNum);
+                productSearch((localStorage.pageNum));
+            }
+            else if((sessionStorage.totalRecords/20)-(sessionStorage.pageNum)>0){
+                //alert(sessionStorage.totalRecords+"/"+sessionStorage.pageNum);
+                $('#search-input').val(sessionStorage.inputVal);
+                $('.loader,.bg-overlay').removeClass('display-none');
+                localStorage.lazyLoadFlag=true;
+                sessionStorage.pageNum++;
+                localStorage.pageNum=sessionStorage.pageNum;
+                //alert(sessionStorage.pageNum);
+                productSearch((sessionStorage.pageNum));
+                sessionStorage.pageNum=null;
+                sessionStorage.totalRecords=null;
+                
+            }
+            else{
+                $('.pullUpLabel').text('No more articles to load.');
+                $('#pullUp').removeClass('loading');
+            }
+        }
+    function loaded() {
+
+        pullUpEl = document.getElementById('pullUp');
+        pullUpOffset = pullUpEl.offsetHeight;
+        
+        myScroll = new iScroll('wrapper', {
+                               useTransition: true,
+                               topOffset: pullDownOffset,
+                               onRefresh: function () {
+                              if (pullUpEl.className.match('loading')) {
+                               pullUpEl.className = '';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more articles';
+                               }
+                               },
+                               onScrollMove: function () {
+                               if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+                               pullUpEl.className = 'flip';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Release to load more articles';
+                               this.maxScrollY = this.maxScrollY;
+                               } else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+                               pullUpEl.className = '';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more articles';
+                               this.maxScrollY = pullUpOffset;
+                               }
+                               },
+                               onScrollEnd: function () {
+                              if (pullUpEl.className.match('flip')) {
+                               pullUpEl.className = 'loading';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Loading Articles';
+                               pullUpAction();	// Execute custom function (ajax call?)
+                               }
+                               
+                               }
+                               });
+                               
+                               setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+    }
+    
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+
+        $(document).ready(function(){
+                          $('#wrapper').css('top','48px');
+                          $('.search-list').bind("tapone", function() {
+                                                 if($(this).find('.check-tick').is(':visible'))
+                                                 $(this).find('.check-tick').addClass('display-none');
+                                                 else
+                                                 $(this).find('.check-tick').removeClass('display-none');
+                                                 $('.gap-done-btn span').text($('.check-tick:visible').length);
+                                                 });
+                          $('.gap-cancel-btn,.gap-done-btn').bind("tapone", function() {
+                                                                    window.location.href="GapList.html"; });
+                          $('.back-btn-header').bind("tapone", function() {
+                                                     window.location.href="GapList.html"; });
+                          });
+	
+	</script>
+	<style type="text/css">
+
+
+
+
+</style>
+  </head>
+  <body>
+  
+	<div id="product-home" class="product-home">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+			<div id="backSearch" class="back-btn-header col-lg-1 col-md-1 col-sm-1 col-xs-1 headerLeftBox" >
+				
+			</div>
+			<div class="col-lg-8 col-md-8 menu-name-header col-sm-8 col-xs-8 headerLeftBox" >
+				<span class="headerTitle" >Mark as Done</span>
+			</div>
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 headerRightBox" >
+				
+			</div>
+		</div>
+		
+		<div id="wrapper">
+		<div id="scroller">
+           
+		<div class="search-container">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contentBox search-results-content gap-done-container">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list ">
+				  <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info out-stock">
+					  Out of Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+					  63636 - Apple product name with weight 500g 
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+					  Aisle 6
+					</div>
+				</div>
+                 <hr class="list-divider"/>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list ">
+                    <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        63636 - Apple product name with weight 500g
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+                 <hr class="list-divider"/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        63636 - Apple product name with weight 500g
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+                    
+				</div>
+                 <hr class="list-divider"/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        63636 - Apple product name with weight 500g
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+                 <hr class="list-divider"/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        63636 - Apple product name with weight 500g
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+                 <hr class="list-divider"/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        63636 - Apple product name with weight 500g
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+                 <hr class="list-divider"/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        63636 - Apple product name with weight 500g
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+                 <hr class="list-divider"/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        63636 - Apple product name with weight 500g
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+                 <hr class="list-divider"/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        63636 - Apple product name with weight 500g
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+                 <hr class="list-divider"/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        63636 - Apple product name with weight 500g
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+                 <hr class="list-divider"/>
+                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count"><img class="check-tick display-none" src="images/iconTickGrey.png"/></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (30)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        63636 - Apple product name with weight 500g
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+               <hr class="list-divider"/>
+			
+            
+			</div>
+		</div>
+        <div id="pullUp">
+            <span class="pullUpIcon"></span><span class="pullUpLabel">Pull up to load more articles</span>
+        </div>
+		</div>
+     
+	</div>
+        <div id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 secondaryWrapper">
+            <div class="row doneGapList">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 gap-done-btn">
+                    Done (<span>0</span>)
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 gap-cancel-btn">
+                    Cancel
+                </div>
+                
+            </div>
+        </div>
+    <div class="bg-overlay display-none"></div>
+    <div class="loader display-none">
+        <img src="images/loader.gif" height="28" alt="sort-img" class="loader-img"/>
+        <div>Please Wait</div>
+    </div>
+    <div class="gap-menu display-none">
+    <div class="gap-menu-done">Done</div>
+    <div class="gap-menu-remove">Remove</div>
+    <div class="gap-menu-sort">Sort</div>
+    </div>
+    
+	<script>
+      
+        </script>
+   
+  </body>
+</html>

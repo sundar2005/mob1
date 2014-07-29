@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>SFF homeScreen</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/jgestures.js"></script>
+	<script>
+	$(document).ready(function(){
+	$.ajax({
+    url: "http://woolworthsapi.sites.tigerspike.com/Products/GetProductByarticle?article=730620&store=1141",
+    dataType: "xml",
+    success: function(data) {
+	var $xml = $(data);
+	console.log($xml.find('ImageUrl').text());
+    }
+});
+});
+	
+	</script>
+  </head>
+  <body>
+  <div class="side-bar">
+ 
+  </div>
+	<div id="homeScreen" class="homeScreen">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+		</div>
+		<div class="container-fluid">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contentBox">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 productBox">
+					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 prodImgBox">
+						<span class="prodImg"></span>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 prodTxtBox">
+						<span class="prodTxt">Products</span>
+					</div>
+					<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 prodSubBox">
+						<div class="prodSearchImgBox">
+							<span class="prodSearchImg"></span>
+						</div>
+						<div class="prodScanImgBox">
+							<span class="prodScanImg"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<script>
+		
+	</script>
+  </body>
+</html>

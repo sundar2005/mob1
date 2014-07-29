@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>SFF Login</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	    <link href="css/owl.carousel.css" rel="stylesheet">
+
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/jgestures.js"></script>
+	<!--<script src="js/common.js"></script>-->
+    <script src="js/iscroll.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+
+	
+  </head>
+  <body>
+  <div id="header" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox transparent display-none">
+			<div id="backLogin" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 headerLeftBox" >
+				<img src="images/iconBackWhite.png" alt="backIcon" class="headerLeftImgLogin" />
+			</div>
+		</div>
+  <div id="wrapper">
+	<div id="scroller">
+	<div id="login">
+		  <div id="demo">
+        <div class="container">
+          <div class="row">
+            <div class="span12">
+              <div id="owl-demo" class="owl-carousel">
+
+                <div class="item"><div class="img-holder"><img class="get-started-img" src="img/ProdHome.png" alt="The Last of us"></div>
+                <div class="item-info">Search Products<label>Find products by number, description, EAN or scanning the barcode</label><span>Skip</span></div>
+                </div>
+                <div class="item"><div class="img-holder"><img class="get-started-img" src="img/ProdInfo.png" alt="GTA V"></div>
+                 <div class="item-info">Full Product Details<label>Check stock, supplier, replinishment and promotional information</label><span>Skip</span></div></div>
+                <div class="item"><div class="img-holder"><img class="get-started-img" src="img/GapManage.png" alt="Mirror Edge"></div>
+                 <div class="item-info">Manage Gap Scan<label>Scan empty shelves, create a list and fill the shelves</label><span>Skip</span></div></div>
+                 <div class="item"><div class="img-holder"><img class="get-started-img" src="img/Feedback.jpg" alt="Mirror Edge"></div>
+                  <div class="item-info">Share Feedback<label>Share your insights, ideas and issues to make this app wonderful</label>
+                  <input id="loginBtn" type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 loginButtonBox got-it-btn" value="GOT IT!" />
+                  </div></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+	</div>
+	<div class="top-wrapper">
+	   
+	   <div class="item-info">Hello, James!<label>You're now ready to start using Field Force.</label></div>
+
+	   <input id="loginBtn" type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 loginButtonBox get-started-btn" value="GET STARTED" />
+
+	</div>
+	</div>
+	</div>
+  <div class="bg-overlay display-none"></div>
+  <div class="loader display-none">
+      <img src="images/loader.gif" height="28" alt="sort-img" class="loader-img"/>
+      <div>Logging In...</div>
+  </div>
+	<script>
+         $(document).ready(function(){
+                           $('#wrapper').css('top','0px').css('background','#f0f0f0');
+                           $('#scroller').css('background','#f0f0f0');
+                           
+                            $("#owl-demo").owlCarousel({
+
+      navigation : true,
+      slideSpeed : 300,
+      paginationSpeed : 400,
+      singleItem : true,
+
+      // "singleItem:true" is a shortcut for:
+      // items : 1, 
+      // itemsDesktop : false,
+      // itemsDesktopSmall : false,
+      // itemsTablet: false,
+       itemsMobile : true
+
+      });
+                           myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true,useTransform: false,
+                                                  useTransition: false });
+                           document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+                           myScroll.disable();
+                           $('.get-started-btn').bind('tapone',function(){
+                                                      $(this).parent().fadeOut(1000);
+                                                 });
+                           $('.got-it-btn,.item-info span').bind('tapone',function(){
+                                                      window.location.href="StoreSelect.html";
+                                                      });
+                         
+                           
+                           });
+	</script>
+  </body>
+</html>

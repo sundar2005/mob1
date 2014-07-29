@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Field Force</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+
+            
+            <script src="js/jquery-1.11.0.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/bootstrap.js"></script>
+            <script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+            <script type="text/javascript" src="js/localstoragedb.min.js"></script>
+            <script type="text/javascript" src="js/localdb.js"></script>
+            <script src="js/jgestures.js"></script>
+            <script src="js/iscroll.js"></script>
+		
+  </head>
+  <body>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+			<div id="backSearch" class="back-btn-header col-lg-1 col-md-1 col-sm-1 col-xs-1 headerLeftBox" >
+				
+			</div>
+			<div class="col-lg-8 col-md-8 menu-name-header col-sm-8 col-xs-8 headerLeftBox" >
+				<span class="headerTitle" >STORE SELECT</span>
+			</div>
+			
+		</div>
+	  <div id="wrapper">
+	<div id="scroller">	
+	<div id="product-home" class="product-home">
+		
+		<div class="container-fluid home-container">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contentBox">
+				
+				<div id="searchByString" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-title">
+				  <span>There are few stores near you so select a store you are currently in</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-list"><label class="store-no display-none">1141</label><div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 select-store-logo woolworths"></div><div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 select-store-details"><span class="store-name-text">Test Store</span><span>0</span></div></div>
+				
+			</div>
+			
+			
+		</div>	
+	</div>
+	</div>
+	</div>
+	<div id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-store-footer">
+				
+				<input type="text" placeholder="Search stores by Location" class="search-store-input"/>
+				</div>
+	<script>
+function displayPositionOld(position) {
+  //alert("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude);
+ $.ajax({
+              /* url:"http://www.woolworths.com.au/storelocator/service/proximity/supermarkets/latitude/"+position.coords.latitude+"/longitude/"+position.coords.longitude+"/range/100/max/10/json",*/
+         url:"http://ncdlsdcwba0001/sloc-web/service/proximity/supermarkets/latitude/"+position.coords.latitude+"/longitude/"+position.coords.longitude+"/range/100/max/10/json",
+                dataType: "text",
+                success: function (data) {
+              //alert(data);
+        var list= JSON.parse(data);
+        var appendData='';
+       
+        if(list.locatorList.msg[0]!='T'){
+
+for(var i=0;i<list.locatorList.storeList.storeRank.length;i++){
+appendData=appendData+'<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-list"><label class="store-no display-none">'+list.locatorList.storeList.storeRank[i].storeDetail.no+'</label><div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 select-store-logo woolworths"></div><div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 select-store-details"><span class="store-name-text">'+list.locatorList.storeList.storeRank[i].storeDetail.name+'</span><span>'+list.locatorList.storeList.storeRank[i].distance+'</span></div></div>';
+}
+$('.contentBox').append(appendData);
+myScroll.refresh();
+	$('.select-store-list').bind("tapone", function(ev) {
+    	localStorage.storeNo=$(this).find('.store-no').text().trim();
+    	localStorage.storeName=$(this).find('.store-name-text').text().trim();
+    	window.location.href='Home.html';
+	});
+         $('.loader,.bg-overlay').addClass('display-none');
+    }
+        else
+        {
+        alert('No Stores in selected Radius');
+        $('.loader,.bg-overlay').addClass('display-none');
+        }
+        }
+                });
+         
+}
+function displayPosition(position){
+    $('.loader,.bg-overlay').removeClass('display-none');
+
+    //alert(ean);
+ setTimeout(function(){
+
+               // alert('trig');
+
+               if(!$('.loader').hasClass('display-none'))
+
+               {
+
+            	$('.loader,.bg-overlay').addClass('display-none');
+
+               alert('Connection Failed. Please check the network settings.');
+
+
+               
+
+               }
+
+               },10000);
+  
+var appendData='';
+
+     /*var url="http://www.woolworths.com.au/storelocator/service/proximity/supermarkets/latitude/-33.813019/longitude/151.104825/range/100/max/10/json";
+
+   var url="http://www.woolworths.com.au/storelocator/service/proximity/supermarkets/latitude/"+lat+"/longitude/"+lon+"/range/100/max/10/json";*/
+
+   var url="http://ncdlsdcwba0001/sloc-web/service/proximity/supermarkets/latitude/"+position.coords.latitude+"/longitude/"+position.coords.longitude+"/range/100/max/10/json";
+
+$.ajax({
+
+           url: url,
+
+           type: 'GET',
+
+  dataType : "json",
+
+           //contentType: "text/xml; charset=\"utf-8\"",
+
+           success :function (data){
+
+           if(data.locatorList!=undefined && data.locatorList!=null
+
+              && data.locatorList.storeList!=undefined && data.locatorList.storeList!=null
+
+              && data.locatorList.storeList.storeRank!=undefined && data.locatorList.storeList.storeRank!=null
+
+              && data.locatorList.storeList.storeRank.length>0 ){
+
+           var list=data.locatorList.storeList.storeRank;
+
+           var site=[];
+
+           for(var i=0;i<list.length;i++){
+
+           list[i].storeDetail.name=(list[i].storeDetail.name!=null && list[i].storeDetail.name!=undefined)? list[i].storeDetail.name :'';
+
+           list[i].distance=(list[i].distance!=null && list[i].distance!=undefined)?list[i].distance :'';
+
+           appendData=appendData+'<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-list"><label class="store-no display-none">'+list[i].storeDetail.no+'</label><div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 select-store-logo woolworths"></div><div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 select-store-details"><span class="store-name-text">'+list[i].storeDetail.name+'</span><span>'+list[i].distance+'</span></div></div>';
+           
+
+           }
+           $('.contentBox').append(appendData);
+           myScroll.refresh();
+           	$('.select-store-list').bind("tapone", function(ev) {
+               	localStorage.storeNo=$(this).find('.store-no').text().trim();
+               	localStorage.storeName=$(this).find('.store-name-text').text().trim();
+               	window.location.href='Home.html';
+           	});
+                    $('.loader,.bg-overlay').addClass('display-none');
+
+           }
+
+           else{
+
+        	   alert('No Stores in selected Radius');
+               $('.loader,.bg-overlay').addClass('display-none');
+
+           
+
+           }
+           },
+
+           error :function(err) {
+
+           //showError();
+    $('.loader,.bg-overlay').addClass('display-none');
+
+          alert("No Response/Cross Domain Error..");
+
+           }
+
+           });
+
+    
+
+}
+function displayError(error) {
+  var errors = { 
+    1: 'Permission denied',
+    2: 'Position unavailable',
+    3: 'Request timeout'
+  };
+  alert("Error: " + errors[error.code]);
+}
+
+$(document).ready(function(){
+	$('.select-store-list').bind("tapone", function(ev) {
+    	localStorage.storeNo=$(this).find('.store-no').text().trim();
+    	localStorage.storeName=$(this).find('.store-name-text').text().trim();
+    	window.location.href='Home.html';
+	});
+                   //$('.loader,.bg-overlay').removeClass('display-none');
+                  $('#wrapper').css('bottom','50px');
+if (navigator.geolocation) {
+  var timeoutVal = 20 * 1000 * 1000;
+  navigator.geolocation.getCurrentPosition(
+    displayPosition,
+    displayError,
+    { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+  );
+}
+else {
+  alert("Geolocation is not supported by this browser");
+}
+                          localStorage.tempSearchList='false';
+                       $('#wrapper').css('top','48px');
+	   myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true });
+       document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	   
+                          
+ $('#searchByString').bind("tapone", function(ev) {
+                                            });
+                          
+                          
+ $('#searchByScan').bind("tapone", function(ev) {
+                                          });
+                          
+                         $('#backProducts').bind("tapone", function(ev) {
+                                          });
+                          
+                          });
+	</script>
+    
+    <div class="bg-overlay display-none"></div>
+    <div class="loader display-none">
+        <img src="images/loader.gif" height="28" alt="sort-img" class="loader-img"/>
+        <div>Please Wait...</div>
+    </div>
+    
+  </body>
+</html>

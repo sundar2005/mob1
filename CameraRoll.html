@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>FeedBack</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/bootstrap.js"></script>
+            <script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+            <script type="text/javascript" src="js/localstoragedb.min.js"></script>
+            <script type="text/javascript" src="js/localdb.js"></script>
+            <script src="js/jgestures.js"></script>
+            <script src="js/iscroll.js"></script>
+		
+
+	
+  </head>
+  <body >
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+    <div id="backSearch" class="back-btn-header col-lg-1 col-md-1 col-sm-1 col-xs-1 headerLeftBox" >
+        
+    </div>
+    <div class="col-lg-8 col-md-8 menu-name-header col-sm-8 col-xs-8 headerLeftBox" >
+        <span class="headerTitle" >Camera Roll</span>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 headerRightBox" >
+       <img class="rating-img camera-roll-img" src="images/UploadCam.png"/>
+    </div>
+	</div>
+		
+		<div id="wrapper">
+		    <div class="scroller">
+		    <div class="container-fluid container-fluid-camera">
+                <div class="screenshot-holder"><img class="screenshots" src="images/Screenshot.png"/><div class="overlay-select display-none"></div></div>
+                <div class="screenshot-holder"><img class="screenshots" src="images/Screenshot.png"/><div class="overlay-select display-none"></div></div>
+                <div class="screenshot-holder"><img class="screenshots third" src="images/Screenshot.png"/><div class="overlay-select display-none"></div></div>
+                <div class="screenshot-holder"><img class="screenshots" src="images/Screenshot.png"/><div class="overlay-select display-none"></div></div>
+                <div class="screenshot-holder"><img class="screenshots" src="images/Screenshot.png"/><div class="overlay-select display-none"></div></div>
+                <div class="screenshot-holder"><img class="screenshots third" src="images/Screenshot.png"/><div class="overlay-select display-none"></div></div>
+                <div class="screenshot-holder"><img class="screenshots" src="images/Screenshot.png"/><div class="overlay-select display-none"></div></div>
+                <div class="screenshot-holder"><img class="screenshots" src="images/Screenshot.png"/><div class="overlay-select display-none"></div></div>
+                <div class="screenshot-holder"><img class="screenshots third" src="images/Screenshot.png"/><div class="overlay-select display-none"></div></div>
+			</div>
+	        </div>
+		    </div>
+			
+			<div id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 secondaryWrapper">
+                <div class="row doneGapList">
+                    
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 gap-cancel-btn cam-upload-btn">
+                       Upload (<span>0</span>)
+                    </div>
+                    
+                </div>
+            </div>
+		
+	
+	
+   
+	<script>
+		$(document).ready(function(){
+                          localStorage.tempSearchList='false';
+                       $('#wrapper').css('top','48px').css('background','#f0f0f0');
+	   myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true });
+       document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	   
+ 
+       
+       $('.cam-upload-btn').bind("tapone", function(ev) {
+           window.location.href="Feedback.html";
+           });
+                          $('#backProducts').bind("tapone", function(ev) {
+                                                  window.location.href="Home.html";
+                                                  });
+                          $('.screenshot-holder').bind("tapone", function(ev) {
+                              if($(this).find('.overlay-select').hasClass('display-none'))
+                                  $(this).find('.overlay-select').removeClass('display-none');
+                              else
+                                  $(this).find('.overlay-select').addClass('display-none');
+                              var uploadCount=0;
+                                  $('.overlay-select').each(function(){
+                                	  if(!$(this).hasClass('display-none'))
+                                		  uploadCount++; 
+                                      });
+                                  $('.cam-upload-btn span').text(uploadCount);
+                                 });
+                    
+                          });
+	</script>
+   <script type="text/javascript" src="cordova-2.5.0.js"></script>
+    <script type="text/javascript" src="js/barcodescanner.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+	<div class="sort-menu-gap  display-none">
+        <div class="sort-location">Screen</div>
+        <div class="sort-stock">Camera Upload</div>
+        <div class="sort-location">Gap Scan</div>
+        <div class="sort-stock">Help</div>
+        <div class="sort-stock">Product</div>
+    </div>
+  </body>
+</html>

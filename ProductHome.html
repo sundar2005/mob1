@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Masters</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+
+            
+            <script src="js/jquery-1.11.0.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/bootstrap.js"></script>
+            <script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+            <script type="text/javascript" src="js/localstoragedb.min.js"></script>
+            <script type="text/javascript" src="js/localdb.js"></script>
+            <script src="js/jgestures.js"></script>
+            <script src="js/iscroll.js"></script>
+		
+  </head>
+  <body>
+  <div id="header" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+		<div id="backProducts" class="col-xs-2 back-btn-header"></div>
+		
+		<div class="col-xs-4 menu-name-header">PRODUCTS</div>
+		</div>
+	  <div id="wrapper">
+	<div id="scroller">	
+	<div id="product-home" class="product-home">
+		
+		<div class="container-fluid home-container">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contentBox">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product-search-text">
+					Search Product
+				</div>
+				<div id="searchByString" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product-search-string">
+				  <label>Search product by Item ID or Item Description</label>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 loginDividerBox product-search-divider">
+				  <span class="loginDividerTxt">or</span>
+				</div>
+				<div  id="searchByScan" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product-search-scan">
+				   <label> Search product by scanning the barcode</label>
+				</div>
+				
+			</div>
+			
+			
+		</div>	
+	</div>
+	</div>
+	</div>
+	<script>
+		$(document).ready(function(){
+                          localStorage.tempSearchList='false';
+                       $('#wrapper').css('top','48px');
+	   myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true });
+       document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	   
+                          
+ $('#searchByString').bind("tapone", function(ev) {
+                                            window.location.href="SearchResults.html";
+                                            });
+                          
+                          
+ $('#searchByScan').bind("tapone", function(ev) {
+                                          app.initialize();
+                                          });
+                          
+                         $('#backProducts').bind("tapone", function(ev) {
+                                          window.location.href="Home.html";
+                                          });
+                          
+                          });
+	</script>
+    <script type="text/javascript" src="cordova-2.5.0.js"></script>
+    <script type="text/javascript" src="js/barcodescanner.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <div style="display:none" id="audio">
+        <audio id="audiotag" src="js/beep.mp3" autobuffer="autobuffer"></audio>
+    </div>
+    <div class="bg-overlay display-none"></div>
+    <div class="loader display-none">
+        <img src="images/loader.gif" height="28" alt="sort-img" class="loader-img"/>
+        <div>Please Wait</div>
+    </div>
+    <div id="footer" class="display-none app">
+        <h1>Apache Cordova</h1>
+        <div id="deviceready" class="blink">
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
+        </div>
+    </div>
+  </body>
+</html>

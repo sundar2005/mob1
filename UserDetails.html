@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>SFF homeScreen</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+
+            
+            <script src="js/jquery-1.11.0.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/bootstrap.js"></script>
+            <script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+            <script type="text/javascript" src="js/localstoragedb.min.js"></script>
+            <script type="text/javascript" src="js/localdb.js"></script>
+            <script src="js/jgestures.js"></script>
+            <script src="js/iscroll.js"></script>
+		
+  </head>
+  <body>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+			<div id="backSearch" class="back-btn-header col-lg-1 col-md-1 col-sm-1 col-xs-1 headerLeftBox" >
+				
+			</div>
+			<div class="col-lg-8 col-md-8 menu-name-header col-sm-8 col-xs-8 headerLeftBox" >
+				<span class="headerTitle" >MEMBERSHIP</span>
+			</div>
+			
+		</div>
+	  <div id="wrapper">
+	<div id="scroller">	
+	<div id="product-home" class="product-home">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 user-status">
+				  Active Member
+			      </div>
+		<div class="container-fluid home-container user-container">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contentBox user-content">
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9  user-content-details">
+			<label>John Ramsay</label>
+			<span>Meat & Livestock Australia</span>
+		</div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  user-content-image">
+				
+		</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  user-partner-type">
+			Gold Partner	
+		</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  user-expiry-date">
+				Expiry Date: 30 July 2015 
+		</div>	
+			
+		</div>	
+	</div>
+		<label class="user-last-login">Last login at <span>Warwick</span> on <span>30 July 2014</span></label>
+	</div>
+	</div>
+	  </div>
+	<div id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				
+				</div>
+	<script>
+
+$(document).ready(function(){
+
+                       $('#wrapper').css('top','48px');
+	   myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true });
+       document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	   
+                          
+ $('#searchByString').bind("tapone", function(ev) {
+                                            });
+                          
+                          
+ $('#searchByScan').bind("tapone", function(ev) {
+                                          });
+                          
+                         $('#backProducts').bind("tapone", function(ev) {
+                                          });
+                          
+                          });
+	</script>
+   
+  </body>
+</html>

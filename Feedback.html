@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>FeedBack</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/bootstrap.js"></script>
+            <script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+            <script type="text/javascript" src="js/localstoragedb.min.js"></script>
+            <script type="text/javascript" src="js/localdb.js"></script>
+            <script src="js/jgestures.js"></script>
+            <script src="js/iscroll.js"></script>
+		
+
+	
+  </head>
+  <body >
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+    <div id="backSearch" class="back-btn-header col-lg-1 col-md-1 col-sm-1 col-xs-1 headerLeftBox" >
+        
+    </div>
+    <div class="col-lg-8 col-md-8 menu-name-header col-sm-8 col-xs-8 headerLeftBox" >
+        <span class="headerTitle" >Feedback</span>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 headerRightBox" >
+        
+    </div>
+	</div>
+		
+		<div id="wrapper">
+		    <div class="scroller">
+		    <div class="container-fluid">
+			<div class="primaryWrapper">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 imageWrapper-feedback">
+					 <div class="row">	
+					 <div class=""><span class="main-title">We'd love to hear your feedback</span>
+				</div>
+					 </div>
+				</div>
+				
+				
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 imageWrapper">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tabs-wrapper">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 insight tab-selected">
+                               Insight
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 idea">
+                               Idea
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 issue">
+                                Issue
+                            </div>
+                        </div>
+				</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tabs-wrapper-content">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 insight-content">
+                               <div class="content text-success">Rate your experience with the app
+                                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 insight-rating">
+                                      <img class="rating-img" src="images/SelectedRating.png"/>
+				      <img class="rating-img" src="images/SelectedRating.png"/>
+				      <img class="rating-img" src="images/SelectedRating.png"/>
+				      <img class="rating-img" src="images/SelectedRating.png"/>
+				      <img class="rating-img" src="images/SelectedRating.png"/> 
+                                   </div>
+				<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 txt" placeholder="Type Your Comments"></textarea>
+								
+                            </div>
+                               </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 idea-content display-none">
+                               <div class="content text-success">Share your ideas with us
+                                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 idea-rating">
+                                       <select class="prod-hierarchy-select upload-cam-select">
+                                           <option value="Select">Select Department</option>
+                                           <option>Screens</option>
+                                           <option>Camera Upload</option>
+                                           <option>Gap Scan</option>
+                                           <option>Help</option>
+                                           <option>Product</option>
+                                           
+                                       </select>
+                                      
+                                   </div>
+								<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 txt" placeholder="Type Your Comments"></textarea>
+								
+                            </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 issue-content display-none">
+                                <div class="content text-success">Upload screenshots of an issue
+                                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 issue-rating">
+                                       <img class="rating-img camera-roll" src="images/UploadCam.png"/>
+ 
+                                   </div>
+								<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 txt" placeholder="Type Your Comments"></textarea>
+								
+                            </div>
+                            </div>
+                        </div>
+						
+						
+						
+				</div>
+			
+			    
+			</div>
+	        </div>
+		    </div>
+			
+			<div id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 secondaryWrapper">
+                <div class="row doneGapList">
+                    
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 feedback-submit gap-cancel-btn">
+                        Submit
+                    </div>
+                    
+                </div>
+            </div>
+		
+	
+	
+   
+	<script>
+		$(document).ready(function(){
+                          localStorage.tempSearchList='false';
+                       $('#wrapper').css('top','48px');
+	   myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true });
+       document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	   
+ 
+                         
+                          $('#backSearch,.feedback-submit').bind("tapone", function(ev) {
+                                                  window.location.href="Home.html";
+                                                  });
+                          $('.camera-roll').bind("tapone", function(ev) {
+                              window.location.href="CameraRoll.html";
+                              });
+                          $('.tabs-wrapper div').bind("tapone", function(ev) {
+                                                      $('.tabs-wrapper div').removeClass('tab-selected');
+                                                      $(this).addClass('tab-selected');
+                                                      if($(this).hasClass('insight')){
+                                                      $('.idea-content,.issue-content').addClass('display-none');
+                                                      $('.insight-content').removeClass('display-none');
+                                                      }
+                                                      else if($(this).hasClass('idea')){
+                                                      $('.insight-content,.issue-content').addClass('display-none');
+                                                      $('.idea-content').removeClass('display-none');
+                                                      }
+                                                      else if($(this).hasClass('issue')){
+                                                      $('.idea-content,.insight-content').addClass('display-none');
+                                                      $('.issue-content').removeClass('display-none');
+                                                      }
+                                                      
+                                                  });
+                          
+                          });
+	</script>
+   <script type="text/javascript" src="cordova-2.5.0.js"></script>
+    <script type="text/javascript" src="js/barcodescanner.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+	<div class="sort-menu-gap  display-none">
+        <div class="sort-location">Screen</div>
+        <div class="sort-stock">Camera Upload</div>
+        <div class="sort-location">Gap Scan</div>
+        <div class="sort-stock">Help</div>
+        <div class="sort-stock">Product</div>
+    </div>
+  </body>
+</html>

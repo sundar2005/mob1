@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>SFF welcomeScreen</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/common.js"></script>
+		<script src="js/jgestures.js"></script>
+
+	<script src="js/iscroll.js"></script>
+	
+  </head>
+  <body>
+  <div id="wrapper">
+	<div id="scroller">
+    <div id="welcomeScreen" class="container-fluid">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 logo-container">
+		
+			<img src="images/splashLogoFull.png" class="logoImg" />
+			
+		
+		  
+		</div>
+		
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 loginButtonBox">
+			<input type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 suppIDloginBox" id="suppIDloginBox" value="Login with Username" />
+            
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 loginDividerBox">
+				<span class="loginDividerTxt">or</span>
+			</div>
+			<input id="PINloginBox" type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 PINloginBox" value="Login with PIN" />
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cant-access-account">
+				<span class="loginDividerTxt">Cant access your account</span>
+			</div>
+		</div>
+		
+	</div>	
+	</div>
+	</div>
+	<div id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footerWrapper by-wool">
+			<img src="images/byWool.png" class="byWool" />
+		</div>
+    <div class="bg-overlay display-none"></div>
+    <div class="loader display-none">
+        <img src="images/loader.gif" height="28" alt="sort-img" class="loader-img"/>
+        <div>Please Wait</div>
+    </div>
+	<script>
+	  $(document).ready(function(){
+	  $('#wrapper').css('top','0px').css('background','#76bf4e');
+        $('#scroller').css('background','#76bf4e');
+	   myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true });
+       document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	   
+		
+		$(window).resize(function(){
+		  
+		  });
+                     
+        $('#suppIDloginBox').bind("tapone", function(ev) {
+            window.location.href="Login.html";
+        });
+	 $('#PINloginBox').bind("tapone", function(ev) {
+            window.location.href="SecurityPIN.html";
+        });
+	  $('.cant-access-account').bind("tapone", function(ev) {
+            window.location.href="ResetPassword.html";
+        });
+       
+	  });
+	 
+	</script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Field Force</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	
+
+            
+            <script src="js/jquery-1.11.0.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/bootstrap.js"></script>
+            <script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+            <script type="text/javascript" src="js/localstoragedb.min.js"></script>
+            <script type="text/javascript" src="js/localdb.js"></script>
+            <script src="js/jgestures.js"></script>
+            <script src="js/iscroll.js"></script>
+            <script type="text/javascript" src="js/jqxcore.js"></script>
+            <script type="text/javascript" src="js/jqxdatetimeinput.js"></script>
+            <script type="text/javascript" src="js/jqxcalendar.js"></script>
+            
+            <script type="text/javascript" src="js/jqxdata.js"></script>
+            <script type="text/javascript" src="js/simulator.js"></script>
+            
+            <link rel="stylesheet" href="css/demo.css" type="text/css" />
+            <link rel="stylesheet" href="css/jqx.base.css" type="text/css" />
+            <link rel="stylesheet" href="css/jqx.mobile.css" type="text/css" />
+          	<link href="css/common.css" rel="stylesheet">
+
+		
+  </head>
+  <body>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+			<div id="backSearch" class="back-btn-header col-lg-1 col-md-1 col-sm-1 col-xs-1 headerLeftBox" >
+				
+			</div>
+			<div class="col-lg-8 col-md-8 menu-name-header col-sm-8 col-xs-8 headerLeftBox" >
+				<span class="headerTitle" >STORE INFORMATION</span>
+			</div>
+            
+
+
+		</div>
+	  <div id="wrapper">
+	<div id="scroller">
+   <div class="container-fluid map-container">
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-info-section">
+           <label class="date-visit"><span>1</span>Date</label>
+           <label  class="details-visit"><span>2</span>Booking Details</label>
+           <label class="cancel-visit"></label>
+       </div>
+       </div>
+       <div id="calendar" class="display-none col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        	
+		</div>
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 booking-details-section">
+           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 book-store-dtls">
+               <label>Store</label>
+               <select class="prod-hierarchy-select">
+                   <option value="Select">Circa</option>
+                   
+               </select>
+               
+           </div>
+           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 book-dtls">
+               <label>Booking Details</label>
+               <textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 txt" placeholder="Provide Description..."></textarea>
+           </div>
+           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 strt-time">
+               <label>Start Time</label>
+           </div>
+           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 end-time">
+               <label>End Time</label>
+           </div>
+       </div>
+       
+	</div>
+	</div>
+      <div id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 secondaryWrapper">
+          <div class="row doneGapList">
+              
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 feedback-submit gap-cancel-btn">
+                  Submit
+              </div>
+              
+          </div>
+      </div>
+	<script>
+
+
+$(document).ready(function(){
+          localStorage.tempSearchList='false';
+           $('#wrapper').css('top','48px');
+           
+	   myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true });
+       document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	   
+                          
+ $('#searchByString').bind("tapone", function(ev) {
+                                            });
+                          
+                          
+ $('#searchByScan').bind("tapone", function(ev) {
+                                          });
+                          
+                         $('#backProducts').bind("tapone", function(ev) {
+                                          });
+                  
+                  var theme = prepareSimulator("calendar");
+                  $("#calendar").jqxCalendar({ theme: theme, titleHeight: 40, columnHeaderHeight: 40, width: '100%', height: '400px' });
+                  initSimulator("calendar");
+                  
+                          });
+                          
+                          
+                          
+
+	</script>
+    
+    <div class="bg-overlay display-none"></div>
+    <div class="loader display-none">
+        <img src="images/loader.gif" height="28" alt="sort-img" class="loader-img"/>
+        <div>Please Wait...</div>
+    </div>
+    
+  </body>
+</html>

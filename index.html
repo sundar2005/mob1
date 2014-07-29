@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Masters</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+    <script type="text/javascript" src="js/localstoragedb.min.js"></script>
+    <script type="text/javascript" src="js/localdb.js"></script>
+    <script src="js/jgestures.js"></script>
+    <script src="js/iscroll.js"></script>
+    
+	<script>
+	$(document).ready(function(){
+	  $('#wrapper').css('top','48px');
+                      $('#scroller').css('height','100%');
+	   myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true });
+       document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	   
+	var sidebarWidth=$(window).width()-48;
+	$('.homeScreen').css('width',$(window).width());
+	$('.side-bar').css('width',sidebarWidth);
+	$('.side-bar').css('left',-(sidebarWidth));
+	$('.menu-btns-sidebar').bind('tapone',function(){
+	  $('.menu-btns-sidebar').removeClass('sidebar-selected');
+	  $(this).addClass('sidebar-selected');
+	});
+	/*$('.container-fluid').click(function(){
+	  if($('.menu-btn-header').hasClass('opened')){
+	    $('.menu-btn-header').removeClass('opened');
+	    $(".side-bar").animate({"left":-(sidebarWidth)}, "medium");
+	    $(".homeScreen").animate({"left":"0px"}, "medium");
+	  }
+	});*/
+    
+	$('.menu-btn-header').bind('tapone',function(){
+	if($(this).hasClass('opened'))
+	{
+	$(this).removeClass('opened');
+	$(".side-bar").animate({"left":-(sidebarWidth)}, "medium");
+	$("#wrapper,.headerBox").animate({"left":"0px"}, "medium");
+	}
+	else
+	{
+	$(this).addClass('opened');
+	$(".side-bar").animate({"left":"0px"}, "medium");
+	$("#wrapper,.headerBox").animate({"left":sidebarWidth}, "medium");
+	}
+	});
+	});
+	
+	</script>
+  </head>
+  <body>
+  <div class="side-bar">
+    <div class="user-details">
+	<div class="store-name-sidebar">
+	  <span class="number-store">2250</span> - <span class="name-store">West Gosford</span>
+	</div>
+	<div class="user-name-sidebar">
+	  John Smith
+	</div>
+	<div class="supplier-name-sidebar">
+	  Store Manager
+	</div>
+	<div class="partner-name-sidebar">
+        PLATINUM
+	</div>
+	<div class="menu-btns-sidebar sidebar-selected home-img-sidebar">
+	  Home
+	</div>
+	<div class="menu-btns-sidebar camera-img-sidebar">
+        Camera Upload
+	</div>
+    <div class="menu-btns-sidebar switch-img-sidebar">
+        Switch Store
+	</div>
+    <hr class="sidebar-menu-divider">
+	<div class="menu-btns-sidebar  help-img-sidebar">
+	  Help
+	</div>
+	<div class="menu-btns-sidebar feedback-img-sidebar">
+	  Feedback
+	</div>
+	<div class="menu-btns-sidebar settings-img-sidebar">
+	  Settings
+	</div>
+	<div id="logOutMenu" class="menu-btns-sidebar logout-img-sidebar">
+	  Logout
+	</div>
+    </div>
+  </div>
+  <div id="header" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+		<div class="col-xs-2 menu-btn-header"></div>
+		
+		<div class="col-xs-4 menu-name-header">HOME</div>
+		</div>
+  <div id="wrapper">
+	<div id="scroller">
+	<div id="homeScreen" class="homeScreen">
+		
+		<div class="container-fluid home-container">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contentBox">
+				<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 productBox">
+					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 prodImgBox">
+						
+					</div>
+					<div id="searchProducts" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 prodTxtBox">
+						<span class="prodTxt">Products</span>
+					</div>
+					<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 prodSubBox">
+						<div class="prodScanImgBox">
+							
+						</div>
+						<div class="prodSearchImgBox ">
+							
+						</div>
+					</div>
+				</div>
+				<div id="getGapList" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 productBox">
+					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ordImgBox">
+						
+					</div>
+					<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 prodTxtBox">
+						<span class="prodTxt">GAP Scan</span>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 prodSubBox">
+						
+						<div class="gapScanCount">
+							11
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	</div>
+	</div>
+	<script>
+		$(document).ready(function(){
+                          localStorage.tempSearchList='false';
+                          $('.number-store').text(localStorage.storeNo);
+                           $('.name-store').text(localStorage.storeName);
+                          $('#searchProducts').bind('tapone',function(){
+                                            window.location.href="ProductHome.html";
+                                            });
+                          $('#getGapList').bind('tapone',function(){
+                                                    window.location.href="GapList.html";
+                                                    });
+                          
+                          $('#logOutMenu').bind('tapone',function(){
+                                                setTimeout(function(){window.location.href="AppLanding.html";},300);
+                                                });
+                          $('.prodSearchImgBox').bind('tapone',function(){
+                                                setTimeout(function(){window.location.href="SearchResults.html";},300);
+                                                });
+                          $('.prodScanImgBox').bind('tapone', function(ev) {
+                                                  app.initialize();
+                                                  });
+                          $('.switch-img-sidebar').bind('tapone', function(ev) {
+                                                    setTimeout(function(){window.location.href="StoreSelect.html";},300);
+                                                    });
+                          $('.feedback-img-sidebar').bind('tapone', function(ev) {
+                              setTimeout(function(){window.location.href="Feedback.html";},300);
+                              });
+                         
+                          });
+	</script>
+    <script type="text/javascript" src="cordova-2.5.0.js"></script>
+    <script type="text/javascript" src="js/barcodescanner.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <div style="display:none" id="audio">
+        <audio id="audiotag" src="js/beep.mp3" autobuffer="autobuffer"></audio>
+    </div>
+   
+    <div id="footer" class="display-none app">
+        <h1>Apache Cordova</h1>
+        <div id="deviceready" class="blink">
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
+        </div>
+    </div>
+    <div class="bg-overlay display-none"></div>
+    <div class="loader display-none">
+        <img src="images/loader.gif" height="28" alt="sort-img" class="loader-img"/>
+        <div>Please Wait</div>
+    </div>
+  </body>
+</html>

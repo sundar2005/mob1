@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>SFF Login</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/jquery-ui.js"></script>
+    <script src="js/iscroll.js"></script>
+    <script src="js/jgestures.js"></script>
+	
+  </head>
+  <body>
+	
+		<div id="header" class="col-lg-12 col-md-12 col-sm-12 transparent col-xs-12 headerBox">
+			<div id="backPIN" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 headerLeftBox" >
+				<img src="images/iconBackWhite.png" alt="backIcon" class="headerLeftImgLogin" />
+			</div>
+		</div>
+        <div id="wrapper" class="transparent">
+        <div id="scroller"  class="transparent">
+		<div class="container-fluid">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contentBox">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 titleBox">
+					<span class="titleTxt">Enter Security PIN</span>
+				</div>
+				
+			</div>
+		</div>
+        </div>
+        </div>
+	
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pin-field">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pin-bar">
+					  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pin-inputs">
+					  <input class="pin-input-one" maxlength="1" readonly="true" type="text" value="" placeholder=""/>
+					</div>
+					   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pin-inputs">
+					  <input class="pin-input-two" maxlength="1" readonly="true"  type="text" value="" placeholder=""/>
+					</div>
+					    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pin-inputs">
+					  <input class="pin-input-three" value="" maxlength="1"  readonly="true" type="text" placeholder=""/>
+					</div>
+					     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pin-inputs">
+					  <input class="pin-input-four" value="" maxlength="1" placeholder=""  readonly="true"  type="text"/>
+					</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pin-keypad pin-number-one">
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-one">1
+					  </div>
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-two">2
+					  </div>
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-three">3
+					  </div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pin-keypad pin-number-two">
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-four">4
+					  </div>
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-five">5
+					  </div>
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-six">6
+					  </div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pin-keypad pin-number-three">
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-seven">7
+					  </div>
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-eight">8
+					  </div>
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-nine">9
+					  </div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pin-keypad pin-number-four">
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 forgot-pin">FORGOT</br> PIN
+					  </div>
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-zero">0
+					  </div>
+					  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 number-delete">&nbsp;
+					  </div>
+					</div>
+				</div>
+    <div class="bg-overlay display-none"></div>
+    <div class="loader display-none">
+        <img src="images/loader.gif" height="28" alt="sort-img" class="loader-img"/>
+        <div>Logging In</div>
+    </div>
+	<script>
+	$(document).ready(function(){
+                      localStorage.clear();
+                      $('#wrapper').css('top','48px');
+                      myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true });
+                      document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+                      $('#backPIN').bind("tapone", function() {
+                                        window.location.href="AppLanding.html";
+                                        });
+     setTimeout(function(){
+	  $(".pin-field").animate({"bottom":"0px"}, "slow");
+	  $(".pin-bar").animate({"margin-left":"0px"}, "slow");
+                },500);
+	  
+	 $('.pin-keypad div').bind('tapone',function(){
+	 //alert($(this).text());
+	 if ($(this).hasClass('forgot-pin')) {
+	  //code
+	 }
+	 else if ($(this).hasClass('number-delete')) {
+	 if ($('.pin-input-four').val()!="") {
+	  $('.pin-input-four').val('').attr('type','text');
+	 }
+	 else if ($('.pin-input-three').val()!="") {
+	  $('.pin-input-three').val('').attr('type','text');
+	 }
+	 else if ($('.pin-input-two').val()!="") {
+	  $('.pin-input-two').val('').attr('type','text');
+	 }
+	 else if ($('.pin-input-one').val()!="") {
+	  $('.pin-input-one').val('').attr('type','text');
+	 }
+	 }
+	else if (!isNaN(($(this).text().trim()))) {
+	 //alert($(this).text());
+	 if ($('.pin-input-one').val()=="") {
+	  $('.pin-input-one').val($(this).text().trim());
+	  setTimeout(function(){ $('.pin-input-one').attr('type','password')},300);
+	 }
+	 else if ($('.pin-input-two').val()=="") {
+	  $('.pin-input-two').val($(this).text().trim());
+	  setTimeout(function(){ $('.pin-input-two').attr('type','password')},300);
+	 }
+	 else if ($('.pin-input-three').val()=="") {
+	  $('.pin-input-three').val($(this).text().trim());
+	  setTimeout(function(){ $('.pin-input-three').attr('type','password')},300);
+	 }
+	 else if ($('.pin-input-four').val()=="") {
+	  $('.pin-input-four').val($(this).text().trim());
+	  setTimeout(function(){ $('.pin-input-four').attr('type','password')},300);
+	 }
+	 if ($('.pin-input-four').val()!="") {
+	  //alert('Triggered');
+                               if($('.pin-input-four').val()=="1" && $('.pin-input-three').val()=="2" && $('.pin-input-two').val()=="3" && $('.pin-input-one').val()=="4"){
+                               $(".pin-field").animate({"bottom":"-376px"}, "medium");
+                               $(".pin-bar").animate({"margin-left":"-385px"}, "medium");
+                               $('.loader,.bg-overlay').removeClass('display-none');
+                               setTimeout(function(){window.location.href="StoreSelect.html";},1000);}
+                               else{
+                               
+                               $( ".pin-bar" ).addClass('pin-wrong').effect( "shake",
+                                                      {times:4,distance:5}, 300 );
+                               $('.pin-input-four,.pin-input-one,.pin-input-two,.pin-input-three').val('');
+                               setTimeout(function(){$( ".pin-bar" ).removeClass('pin-wrong');},400);
+                               }
+	 }
+	 }
+	});
+	  });	
+	</script>
+  </body>
+</html>

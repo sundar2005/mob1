@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>SFF homeScreen</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+
+            
+            <script src="js/jquery-1.11.0.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/bootstrap.js"></script>
+            <script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+            <script type="text/javascript" src="js/localstoragedb.min.js"></script>
+            <script type="text/javascript" src="js/localdb.js"></script>
+            <script src="js/jgestures.js"></script>
+            <script src="js/iscroll.js"></script>
+		
+  </head>
+  <body>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+			<div id="backSearch" class="back-btn-header col-lg-1 col-md-1 col-sm-1 col-xs-1 headerLeftBox" >
+				
+			</div>
+			<div class="col-lg-8 col-md-8 menu-name-header col-sm-8 col-xs-8 headerLeftBox" >
+				<span class="headerTitle" >PLANOGRAM</span>
+			</div>
+			
+		</div>
+	  <div id="wrapper">
+	<div id="scroller">	
+	<div id="product-home" class="product-home">
+		
+		<div class="container-fluid home-container">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contentBox planogram-content">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-list planogram-head-bar select-planogram-list">
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-title">
+				    Promotional
+				  </div>
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-count">
+				    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 planogram-list-count">
+					<div class="list-count plano-count">1</div>
+				    </div>
+				</div>	
+			      </div>
+			
+				<div id="planogram-head-text" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-title">
+				  <span>Department wise Planogram</span>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-list select-planogram-list">
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-title">
+				    Bakehouse
+				  </div>
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-count">
+				    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 planogram-list-count">
+					<div class="list-count plano-count">6</div>
+				    </div>
+				</div>	
+			      </div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-list select-planogram-list">
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-title">
+				    Delicatessen
+				  </div>
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-count">
+				    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 planogram-list-count">
+					<div class="list-count plano-count">5</div>
+				    </div>
+				</div>	
+			      </div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-list select-planogram-list">
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-title">
+				    General Merchandise
+				  </div>
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-count">
+				    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 planogram-list-count">
+					<div class="list-count plano-count">4</div>
+				    </div>
+				</div>	
+			      </div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-list select-planogram-list">
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-title">
+				    Grocery
+				  </div>
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-count">
+				    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 planogram-list-count">
+					<div class="list-count plano-count">6</div>
+				    </div>
+				</div>	
+			      </div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-store-list select-planogram-list">
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-title">
+				    Meat
+				  </div>
+				  <div class="col-lg-6 col-md-6 col-sm-6  col-xs-6 planogram-count">
+				    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 planogram-list-count">
+					<div class="list-count plano-count">3</div>
+				    </div>
+				</div>	
+			      </div>
+			
+		</div>	
+	</div>
+	</div>
+	</div>
+	<div id="footer" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-store-footer">
+				
+				<input type="text" placeholder="Search Planogram" class="search-store-input"/>
+				</div>
+	<script>
+
+$(document).ready(function(){
+
+                       $('#wrapper').css('top','48px');
+	   myScroll = new IScroll('#wrapper', { mouseWheel: true, tap: true });
+       document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	   
+                          
+ $('#searchByString').bind("tapone", function(ev) {
+                                            });
+                          
+                          
+ $('#searchByScan').bind("tapone", function(ev) {
+                                          });
+                          
+                         $('#backProducts').bind("tapone", function(ev) {
+                                          });
+                          
+                          });
+	</script>
+   
+  </body>
+</html>

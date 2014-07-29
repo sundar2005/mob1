@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Masters</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	
+	<script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+	<script type="text/javascript" src="js/localstoragedb.min.js"></script>
+	<script type="text/javascript" src="js/localdb.js"></script>
+	<script src="js/jgestures.js"></script>
+	<script src="js/iscroll4.js"></script>
+    <script src="js/jquery.jsort.0.4.js"></script>
+	<script>
+        var myScroll,
+        pullDownEl, pullDownOffset,
+        pullUpEl, pullUpOffset,
+        generatedCount = 0;
+        
+        function pullUpAction(){
+           
+                $('.pullUpLabel').text('No more articles to load.');
+                $('#pullUp').removeClass('loading');
+           
+        }
+    function loaded() {
+
+        pullUpEl = document.getElementById('pullUp');
+        pullUpOffset = pullUpEl.offsetHeight;
+        
+        myScroll = new iScroll('wrapper', {
+                               useTransition: true,
+                               topOffset: pullDownOffset,
+                               onRefresh: function () {
+                              if (pullUpEl.className.match('loading')) {
+                               pullUpEl.className = '';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more articles';
+                               }
+                               },
+                               onScrollMove: function () {
+                               if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+                               pullUpEl.className = 'flip';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Release to load more articles';
+                               this.maxScrollY = this.maxScrollY;
+                               } else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+                               pullUpEl.className = '';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more articles';
+                               this.maxScrollY = pullUpOffset;
+                               }
+                               },
+                               onScrollEnd: function () {
+                              if (pullUpEl.className.match('flip')) {
+                               pullUpEl.className = 'loading';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Loading Articles';
+                               pullUpAction();	// Execute custom function (ajax call?)
+                               }
+                               
+                               }
+                               });
+                               
+                               setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+    }
+    
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+
+        $(document).ready(function(){
+                          $('#wrapper').css('top','48px');
+                          $('.search-list').bind("tapone", function() {
+                                                $('.search-list').removeClass('del-done').find('.done-btn,.delete-btn').remove();
+                                                $(this).addClass('del-done').append('<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 done-btn ">Done</div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 delete-btn">Remove</div>');
+                                                 myScroll.refresh();
+                                                  $('.delete-btn').bind("tapone", function() {
+                                                 $(this).parent().remove();
+                                                                        myScroll.refresh();
+                                                 });
+                                                 $('.done-btn').bind("tapone", function(e) {
+                                                                     //e.preventDefault();
+                                                                     setTimeout(function(){
+                                                                                $('.done-btn,.delete-btn').remove();
+                                                                   $('.search-list').removeClass('del-done').addClass('gap-article-done');
+                                                                                },100);
+                                                                    
+                                                                       });
+                                                 });
+                          $('.headerRightImgLogin').bind("tapone", function() {
+                                                         if($('.gap-menu').hasClass('display-none')){
+                                                         $('.gap-menu').removeClass('display-none');$('.sort-menu-gap').addClass('display-none');}
+                                                         else
+                                                          $('.gap-menu').addClass('display-none');
+                                                            });
+                          
+                          $('.gap-menu-remove').bind("tapone", function() {
+                                                     window.location.href="GapListRemove.html"; });
+                          $('.back-btn-header').bind("tapone", function() {
+                                                     window.location.href="Home.html"; });
+                          
+                          
+                          $('.gap-menu-done').bind("tapone", function() {
+                                                   window.location.href="GapListDone.html"; });
+                          $('#scroller').bind("tapone", function() {
+$('.gap-menu,.sort-menu-gap').addClass('display-none'); });
+                        
+                        
+                          $('.gap-menu-sort').bind("tapone", function() {
+                                                   $('.gap-menu').addClass('display-none');
+$('.sort-menu-gap').removeClass('display-none');
+                                                   });
+                          $('.scanner-btn-plus').bind("tapone", function() {
+                                                  app.initialize();
+                                                   });
+                          
+                          $('.sort-stock').bind("tapone", function() {
+                          $(".search-results-content").jSort({
+                                                             sort_by: 'span.search-stock-info',
+                                                             item: 'section',
+                                                             order: 'asc'
+                                                             });
+                                               $('.sort-menu-gap').addClass('display-none');
+                                                    });
+                          $('.sort-location').bind("tapone", function() {
+                          $(".search-results-content").jSort({
+                                                             sort_by: 'div.store-name',
+                                                             item: 'section',
+                                                             order: 'asc'
+                                                             });
+                                                   $('.sort-menu-gap').addClass('display-none');
+                                                    });
+                          
+                                                   });
+	
+	</script>
+	<style type="text/css">
+
+
+
+
+</style>
+  </head>
+  <body>
+  
+	<div id="product-home" class="product-home">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+			<div id="backSearch" class="back-btn-header col-lg-1 col-md-1 col-sm-1 col-xs-1 headerLeftBox" >
+				
+			</div>
+			<div class="col-lg-7 col-md-7 menu-name-header col-sm-7 col-xs-7 headerLeftBox" >
+				<span class="headerTitle" >GAP SCAN</span>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 headerRightBox" >
+				<img src="images/iconPlusWhite.png" alt="backIcon" class="scanner-btn-plus" />
+                
+                <img src="images/iconAdditionalActions.png" alt="backIcon" class="headerRightImgLogin" />
+			</div>
+		</div>
+		
+		<div id="wrapper">
+		<div id="scroller">
+           
+		<div class="search-container">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contentBox search-results-content">
+                <section>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list ">
+				  <div class="list-count">1</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info out-stock">
+					  Out of Stock (<span class="search-stock-info-val">1</span>)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+					  PT63636 - Worx 20V Li-Ion Cordless Drill Driver With 158 Accessories 
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+					  Aisle 3
+					</div>
+				</div>
+                </section>
+                 <hr class="list-divider"/>
+                <section>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list ">
+                    <div class="list-count">2</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (<span class="search-stock-info-val">6</span>)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        PT63637 - Challenge 500W Impact Drill CID500
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+                </section>
+                 <hr class="list-divider"/>
+                <section>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count">3</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (<span class="search-stock-info-val">65</span>)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        PT63638 - Xceed 250W Angle Grinder 230x22.2mm
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        GAisle 5
+					</div>
+                    
+				</div>
+                </section>
+                 <hr class="list-divider"/>
+                <section>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count">4</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (<span class="search-stock-info-val">34</span>)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        PT63639 - Xceed 1010W Angle Grinder 125mm
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        CAisle 3
+					</div>
+				</div>
+                </section>
+                 <hr class="list-divider"/>
+                <section>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count">5</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (<span class="search-stock-info-val">3</span>)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        PT63640 - Xceed 900W Angle Grinder 100mm
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        ZAisle 1
+					</div>
+				</div>
+                </section>
+                 <hr class="list-divider"/>
+                <section>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count">6</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (23)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        PT63641 - Xceed 250W Bench Grinder 150x20mm
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 8
+					</div>
+				</div>
+                </section>
+                 <hr class="list-divider"/>
+                <section>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count">7</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (<span class="search-stock-info-val">24</span>)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        PT63642 - Xceed 800W Belt Sander
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+				</div>
+                </section>
+                 <hr class="list-divider"/>
+                <section>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count">8</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (<span class="search-stock-info-val">77</span>)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        PT63643 - Worx 260W Finishing Sander
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 3
+					</div>
+				</div>
+                </section>
+                 <hr class="list-divider"/>
+                <section>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count">9</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (<span class="search-stock-info-val">21</span>)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        PT63644 - Worx 750W Planer 76mm 
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 4
+					</div>
+				</div>
+                </section>
+                 <hr class="list-divider"/>
+                <section>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count">10</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (<span class="search-stock-info-val">23</span>)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        PT63645 - Worx 2400W Angle Grinder 
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 62
+					</div>
+                    
+                
+				</div>
+                </section>
+                 <hr class="list-divider"/>
+                <section>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-list">
+                    <div class="list-count">11</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-stock-info in-stock">
+                        In Stock (<span class="search-stock-info-val">5</span>)
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-name">
+                        PT63646 - Worx 1010W Angle Grinder 
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 store-name">
+                        Aisle 6
+					</div>
+                    </div>
+                    
+				</section>
+               <hr class="list-divider"/>
+			
+            
+			</div>
+		</div>
+        <div id="pullUp">
+            <span class="pullUpIcon"></span><span class="pullUpLabel">Pull up to load more articles</span>
+        </div>
+		</div>
+     
+	</div>
+    <div class="bg-overlay display-none"></div>
+    <div class="loader display-none">
+        <img src="images/loader.gif" height="28" alt="sort-img" class="loader-img"/>
+        <div>Please Wait</div>
+    </div>
+    <div class="gap-menu display-none">
+    <div class="gap-menu-done">Done</div>
+    <div class="gap-menu-remove">Remove</div>
+    <div class="gap-menu-sort">Sort</div>
+    </div>
+    
+    <div class="sort-menu-gap  display-none">
+        <div class="sort-label">Sort</div>
+        <div class="sort-location">By Location</div>
+        <div class="sort-stock">By Stock Level</div>
+    </div>
+    
+	<script>
+      
+        </script>
+    <script type="text/javascript" src="cordova-2.5.0.js"></script>
+    <script type="text/javascript" src="js/barcodescanner.js"></script>
+    <script type="text/javascript" src="js/indexx.js"></script>
+    <div style="display:none" id="audio">
+        <audio id="audiotag" src="js/beep.mp3" autobuffer="autobuffer"></audio>
+    </div>
+   
+    <div id="footer" class="display-none app">
+        <h1>Apache Cordova</h1>
+        <div id="deviceready" class="blink">
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
+        </div>
+    </div>
+  </body>
+</html>

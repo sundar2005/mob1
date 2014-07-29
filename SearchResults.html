@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>Masters</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/common.css" rel="stylesheet">
+
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/datajs-1.0.3.js"></script>
+<script type="text/javascript" src="js/localstoragedb.min.js"></script>
+<script type="text/javascript" src="js/localdb.js"></script>
+<script src="js/jgestures.js"></script>
+<script src="js/iscroll4.js"></script>
+<script>
+        var myScroll,
+        pullDownEl, pullDownOffset,
+        pullUpEl, pullUpOffset,
+        generatedCount = 0;
+        var data = {
+                //test:'test 1',
+                results: [ 
+                      {article: '16',description:'Stock in hand',department:"department",dept_name:"dept_name",category:"product",cat_name:"cat_name",
+                    	  sub_category:"subcategory",sub_cat_name:"sub_cat_name",segment:"segment",segment_name:"segment_name",eas_ind:"eas_ind"}
+                ],
+                testRcd:'value'   
+      };
+
+       // var data = {16,"Stock in hand"};
+        function pullUpAction(){
+            
+            if((localStorage.totalRecords/20)-(localStorage.pageNum)>0){
+
+                $('.loader,.bg-overlay').removeClass('display-none');
+                localStorage.lazyLoadFlag=true;
+                localStorage.pageNum++;
+               // alert(localStorage.pageNum);
+                productSearch((localStorage.pageNum));
+            }
+            else if((sessionStorage.totalRecords/20)-(sessionStorage.pageNum)>0){
+                //alert(sessionStorage.totalRecords+"/"+sessionStorage.pageNum);
+                $('#search-input').val(sessionStorage.inputVal);
+                $('.loader,.bg-overlay').removeClass('display-none');
+                localStorage.lazyLoadFlag=true;
+                sessionStorage.pageNum++;
+                localStorage.pageNum=sessionStorage.pageNum;
+                //alert(sessionStorage.pageNum);
+                productSearch((sessionStorage.pageNum));
+                sessionStorage.pageNum=null;
+                sessionStorage.totalRecords=null;
+                
+            }
+            else{
+                $('.pullUpLabel').text('No more articles to load.');
+                $('#pullUp').removeClass('loading');
+            }
+        }
+    function loaded() {
+
+        pullUpEl = document.getElementById('pullUp');
+        pullUpOffset = pullUpEl.offsetHeight;
+        
+        myScroll = new iScroll('wrapper', {
+                               scrollbarClass:'myscrollBar',
+                               useTransition: true,
+                               topOffset: pullDownOffset,
+                               onRefresh: function () {
+                              if (pullUpEl.className.match('loading')) {
+                               pullUpEl.className = '';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more articles';
+                               }
+                               },
+                               onScrollMove: function () {
+                               //myScroll.refresh();
+                               if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+                               pullUpEl.className = 'flip';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Release to load more articles';
+                               this.maxScrollY = this.maxScrollY;
+                               } else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+                               pullUpEl.className = '';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more articles';
+                               this.maxScrollY = pullUpOffset;
+                               }
+                               },
+                               onScrollEnd: function () {
+                              if (pullUpEl.className.match('flip')) {
+                               pullUpEl.className = 'loading';
+                               pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Loading Articles';
+                               pullUpAction();	// Execute custom function (ajax call?)
+                               }
+                               
+                               }
+                               });
+                               
+                               setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+    }
+    
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    
+   	document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+
+var initScrollCode=0;
+	
+        $(document).ready(function(){
+                          $('#search-input').trigger('focus');
+
+            $('#search-input').bind('keypress', function(e) {
+                                    if(e.keyCode==13 &&  $('#search-input').val().trim()!=""){
+		                                    var inputItem = $('#search-input').val().trim();
+		                                    var targetProduct;
+		                                     $('.loader,.bg-overlay').removeClass('display-none');
+		                                    $('.search-results-content').html('');
+		                                    myScroll.refresh();
+		                                
+									                   if (inputItem == '1') {
+							                        	  targetProduct = 'ProductInfo-1.html';
+							                          } else if (inputItem == '2') {
+							                        	  targetProduct = 'ProductInfo-2.html';
+							                          } else if (inputItem == '3') {
+							                        	  targetProduct = 'ProductInfo-3.html';
+							                          }else if (inputItem == '4') {
+							                        	  targetProduct = 'ProductInfo-4.html';
+							                          }else if (inputItem == '5') {
+							                        	  targetProduct = 'ProductInfo-5.html';
+							                          }else if (inputItem == '1001') {
+							                        	  targetProduct = 'ProductInfo-1.html';
+							                          } else if (inputItem == '1002') {
+							                        	  targetProduct = 'ProductInfo-2.html';
+							                          } else if (inputItem == '1003') {
+							                        	  targetProduct = 'ProductInfo-3.html';
+							                          }else if (inputItem == '1004') {
+							                        	  targetProduct = 'ProductInfo-4.html';
+							                          }else if (inputItem == '1005') {
+							                        	  targetProduct = 'ProductInfo-5.html';
+							                          }else {
+							                        	  alert ('ITEM NOT FOUND')
+														  targetProduct = 'SearchResults.html';
+							                          }
+							                          setTimeout(
+							                                  function(){
+							                                      window.location.href=targetProduct;
+							                                     },	300);
+
+		                                     $(this).blur();
+                                    }
+                                      });
+                         
+                         
+						  $('#wrapper').css('top','96px');
+                        
+                          
+                          $('#searchCancel').bind("tapone", function(ev) {
+
+                                            window.location.href="ProductHome.html";
+                                            });
+                          
+                          
+                          $('#searchDel').bind("tapone", function(ev) {
+
+                                           $('#search-input').val('');
+                                               $('.search-results-count').addClass('display-none');
+                                               $('.advance-search-bar').removeClass('display-none');
+                                               $('.search-results-content').html('');
+                                            });
+                          });
+	
+	</script>
+<style type="text/css">
+</style>
+</head>
+<body>
+
+<div id="product-home" class="product-home">
+<div id="header"
+	class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerBox">
+<div class="col-xs-9 search-input-header">
+<!-- form action="#"-->
+	<input type="search" id="search-input"
+	class="search-input" value="" placeholder="Product Search" autofocus />
+<!-- /form-->
+<label id="searchDel" class="delete-input"></label></div>
+
+<div id="searchCancel" class="col-xs-3 search-header-cancel">Cancel</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 advance-search-bar">
+<div
+	class="col-lg-12 col-md-12 col-sm-12 col-xs-12 advance-search-title">
+MORE OPTIONS</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 advance-search-text">
+Product Hierarchy</div>
+<div
+	class="col-lg-12 col-md-12 col-sm-12 col-xs-12 advance-search-input">
+<select class="prod-hierarchy-select department">
+	<option value="Select">Select Department</option>
+	<option value="Select">Tools</option>
+	<option value="Select">Electrical & Hardware</option>
+	<option value="Select">Building & Timber</option>
+	<option value="Select">Garden & Outdoor Living</option>
+	<option value="Select">Bathroom & Plumbing</option>
+	<option value="Select">Fooring & Tiles</option>
+	<option value="Select">Painting</option>
+	<option value="Select">Decorating</option>
+	<option value="Select">Cleaning & Storage</option>
+	<option value="Select">Lighting & Fans</option>
+
+</select> <select class="prod-hierarchy-select display-none category">
+	<option value="Select">Select Category</option>
+
+</select> <select class="prod-hierarchy-select display-none sub-category">
+	<option value="Select">Select Sub-Category</option>
+
+</select> <select class="prod-hierarchy-select display-none segment">
+	<option value="Select">Select Segment</option>
+
+</select> <input id="loginBtn" onclick="hierarchyCall();" type="button"
+	class="display-none col-lg-12 col-md-12 col-sm-12 col-xs-12 hieraychy-search-btn"
+	value="Search" /></div>
+</div>
+<div
+	class="display-none col-lg-12 col-md-12 col-sm-12 col-xs-12 search-results-count">
+<span></span></div>
+</div>
+
+<div id="wrapper">
+<div id="scroller">
+
+<div class="search-container">
+<div
+	class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contentBox search-results-content">
+</div>
+</div>
+<div id="pullUp"><span class="pullUpIcon"></span><span
+	class="pullUpLabel">Pull up to load more articles</span></div>
+</div>
+
+</div>
+<div class="bg-overlay display-none"></div>
+<div class="loader display-none"><img src="images/loader.gif"
+	height="28" alt="sort-img" class="loader-img" />
+<div>Please Wait</div>
+</div>
+</body>
+</html>
